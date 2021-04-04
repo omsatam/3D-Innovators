@@ -1,0 +1,1 @@
+In this folder the user specific folders are created. It contains generated STL files from user uploaded dicom files.
