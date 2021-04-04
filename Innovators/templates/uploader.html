@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+ Stl Converter
+{% endblock title %}
+{% block servicesactive %} active  {% endblock servicesactive %}
+{% block loginaction %} ../login {% endblock loginaction %}
+{% block signupaction %} ../signup {% endblock signupaction %}
+{% block logout %} ../logout {% endblock logout %}
+{% block body %}
+
+{% if user.is_authenticated %}
+
+
+    
+    <form action="/uploader/" method="POST" enctype="multipart/form-data" class = "container mx-auto m-2">
+    {% csrf_token %} 
+        <p class = "fs-4 m-2">Please upload CT scan data here</p>
+        <div class="mb-3 col-md-8">
+            <label for="exampleFormControlInput1" class="form-label" name = "contactEmail">File Name</label>
+            <input type="text" class="form-control" id="filename" name = "filename" required>
+          </div>
+          <div class="mb-3 col-md-8">
+            <label for="formFileMultiple" class="form-label">Choose Files</label>
+            <input class="form-control" type="file" id="CT_data" name = "CT_data" multiple>
+          </div>
+        <div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit</button>
+</div>
+        </form>
+    {% else %}
+    <p class = "fs-2 mt-3 mx-4 ">Please login to upload files</p>
+
+    {% endif %}
+
+    
+
+    {% endblock body %}
+    {% block footerFixed %} fixed-bottom {% endblock footerFixed %}

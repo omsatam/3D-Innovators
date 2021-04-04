@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+ Contact us
+ {% endblock title %}
+{% block contactactive %} active {% endblock contactactive %}
+{% block loginaction %} ../login {% endblock loginaction %}
+{% block signupaction %} ../signup {% endblock signupaction %}
+{% block logout %} ../logout {% endblock logout %}
+{% block body %}
+
+{% if user.is_authenticated %}
+
+
+<form action="" method="post" class = " container row mt-4 mx-auto">
+{% csrf_token %} 
+<div class="mb-3 col-md-8">
+  <label for="exampleFormControlInput1" class="form-label" >Email address</label>
+  <input type="email" class="form-control" name = "contactEmail" id="exampleFormControlInput1" placeholder="name@example.com" required>
+</div>
+<div class="mb-3 col-md-8 ">
+  <label for="exampleFormControlTextarea1" class="form-label" >please write your feedback here</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" name = "contactFeedback"  rows="3" required></textarea>
+</div>
+<div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit</button>
+</div>
+</form>
+
+
+ {% else %}
+
+
+<form action="" method="post" class = " container row mt-4 mx-auto">
+{% csrf_token %} 
+<div class="mb-3 col-md-8">
+  <label for="exampleFormControlInput1" class="form-label" name = "fname">First Name</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" name = "fname" required>
+</div>
+<div class="mb-3 col-md-8">
+  <label for="exampleFormControlInput1" class="form-label" name = "lname">Last name</label>
+  <input type="text" class="form-control" id="exampleFormControlInput1" name = "lname" required>
+</div>
+<div class="mb-3 col-md-8">
+  <label for="exampleFormControlInput1" class="form-label" >Email address</label>
+  <input type="email" class="form-control" id="exampleFormControlInput1" name = "contactEmail" placeholder="name@example.com" required>
+</div>
+<div class="mb-3 col-md-8 ">
+  <label for="exampleFormControlTextarea1" class="form-label"  >please write your feedback here</label>
+  <textarea class="form-control" id="exampleFormControlTextarea1" name = "contactFeedback" rows="3" required></textarea>
+</div>
+<div class="col-12">
+    <button class="btn btn-primary" type="submit">Submit</button>
+</div>
+</form>
+{% endif %}
+
+
+{% endblock body %}
+{% block footerFixed %} fixed-bottom {% endblock footerFixed %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+Popular apps
+{% endblock title %}
+{% block servicesactive %} active  {% endblock servicesactive %}
+{% block loginaction %} ../login {% endblock loginaction %}
+{% block signupaction %} ../signup {% endblock signupaction %}
+{% block logout %} ../logout {% endblock logout %}
+{% block body %}
+{% load static %}
+<div class="container">
+<div class="row m-2">
+  <div class="col-md-5 m-2">
+    <div class="card">
+    <img src="{% static 'stlConverter/images/covid.jpg' %}" class="card-img-top" alt="..." style = max-height:30%;">
+      <div class="card-body">
+        <h5 class="card-title">Corona Probability Checker</h5>
+        <p class="card-text">This application takes symptoms of a user as a input and predicts the probability</p>
+        <a href="https://covidchecker-19.herokuapp.com" target = "_blank" class="btn btn-primary">Go to app</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-5 m-2">
+    <div class="card">
+    <img src="{% static 'stlConverter/images/car2.jpg' %}" class="card-img-top" alt="..." style="max-height: 245px;">
+      <div class="card-body">
+        <h5 class="card-title">Car price predictor</h5>
+        <p class="card-text">This application takes all the used car parameters and oredicts the price of car based on it</p>
+        <a href="https://car-price-predi.herokuapp.com" target = "_blank" class="btn btn-primary">Go to app</a>
+      </div>
+    </div>
+  </div>
+   <div class="col-md-5 m-2">
+    <div class="card">
+    <img src="{% static 'stlConverter/images/flight.jpg' %}" class="card-img-top h-50" alt="..." style="max-height: 250px;">
+      <div class="card-body">
+        <h5 class="card-title">Flight fare predictor</h5>
+        <p class="card-text">This application takes all the data of journey and predicts fare based on past data
+        
+        
+        </p>
+        <a href="https://flight-price-predi.herokuapp.com" target = "_blank" class="btn btn-primary">Go to app</a>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock body %}
+
+

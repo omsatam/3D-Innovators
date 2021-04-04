@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+About
+ {% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+{% block loginaction %} ../login {% endblock loginaction %}
+{% block signupaction %} ../signup {% endblock signupaction %}
+{% block logout %} ../logout {% endblock logout %}
+{% block body %}
+
+{% load static %}
+
+<div class = "container m-5">
+<div class="row">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-6">
+      <img src="{% static 'stlConverter/images/kaif.jpg' %}" style="max-height: 600px; max-width:250px;" alt="...">
+    </div>
+    <div class="col-md-6 ml-2">
+      <div class="card-body">
+        <h5 class="card-title">Kaif</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <a class="card-text text-white " href=""><button class="btn btn-sm btn-primary font-weight-bold">Follow</small></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-6">
+      <img src="{% static 'stlConverter/images/shehbaz.jpg' %}" style="max-height: 600px; max-width:250px;" alt="...">
+    </div>
+    <div class="col-md-6 ml-2">
+      <div class="card-body">
+        <h5 class="card-title">Shehbaz</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <a class="card-text text-white " href=""><button class="btn btn-sm btn-primary">Follow</small></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="row">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-6">
+      <img src="{% static 'stlConverter/images/tausif.jpg' %}" style="max-height: 600px; max-width:250px;" alt="...">
+    </div>
+    <div class="col-md-6 ml-2">
+      <div class="card-body">
+        <h5 class="card-title">Tausif</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+         <a class="card-text text-white " href=""><button class="btn btn-sm btn-primary">Follow</small></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-6">
+      <img src="{% static 'stlConverter/images/om1.jpg' %}" style="max-height: 600px; max-width:250px;" alt="...">
+    </div>
+    <div class="col-md-6 ml-2">
+      <div class="card-body">
+        <h5 class="card-title">Om</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+         <a class="card-text text-white " href= "" target="_blank"><button class="btn btn-sm btn-primary ">Follow</small></a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class = "row">
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-6">
+      <img src="{% static 'stlConverter/images/om2.jpg' %}" style="max-height: 600px; max-width:250px;" alt="...">
+    </div>
+    <div class="col-md-6 ml-2">
+      <div class="card-body">
+        <h5 class="card-title">Kaif </h5>
+        <p class="card-text">This is a Kaif with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+       <a class="card-text text-white " href=""><button class="btn btn-sm btn-primary">Follow</small></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-6">
+      <img src="{% static 'stlConverter/images/kaif.jpg' %}" style="max-height: 600px; max-width:250px;" alt="...">
+    </div>
+    <div class="col-md-6 ml-2">
+      <div class="card-body">
+        <h5 class="card-title">Shehbaz</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+         <a class="card-text text-white " href=""><button class="btn btn-sm btn-primary">Follow</small></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+{% endblock body %}
