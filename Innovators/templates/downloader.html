@@ -1,16 +1,16 @@
-{% extends "base.html" %}
-
-{% block title %}
-Download File
- {% endblock title %}
-{% block servicesactive %} active {% endblock servicesactive %}
-{% block loginaction %} ../login {% endblock loginaction %}
-{% block signupaction %} ../signup {% endblock signupaction %}
-{% block logout %} ../logout {% endblock logout %}
+{% extends "base.html" %} 
+{% block title %} Download Files {% endblock title %}
+{% block servicesactive %} active {% endblock servicesactive %} 
+{% block loginaction %} ../login {% endblock loginaction %} 
+{% block signupaction %} ../signup {% endblock signupaction %} 
+{% block logout %} ../logout {% endblock logout %} 
 {% block body %}
 
-<p class = "fs-2 mt-3 mx-4 ">Download your STL file by clicking below</p>
-<a href = {{stlPath}} target="_blank" class="m-4 fs-4" >Download File</a>
+<p class="fs-2 mt-3 mb-2 mx-5">Download your files by clicking below</p>
+<hr>
+<a href="{{stlPath}}" target="_blank" class="m-5 pr-5 fs-4">Download STL File</a>
+<a href="{{nrrdPath}}" target="_blank" class="m-5 p-5 fs-4">Download NRRD File</a>
 
-{% endblock body %}
+{% endblock body %} 
 {% block footerFixed %} fixed-bottom {% endblock footerFixed %}
+
