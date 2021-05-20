@@ -20,6 +20,8 @@ import chart_studio.plotly as py
 #from plotly.graph_objs import *
 from glob import glob
 from .forms import UploadFileForm
+import nrrd
+from stl import mesh
 
 
 def home(request):
@@ -51,13 +53,13 @@ def contact(request):
         server.starttls()
         server.ehlo()
 
-        server.login('Innovator_email', 'Innovator_email_password')
+        server.login('satamom254@gmail.com', 'ydcpkkzqtdwndcqs')
         subject = "Recieved feedback from " + str(fname) + " " + str(lname)
         body = str(fname) + " " + str(lname) + " says " + str(feedback)
         message = f'subject:{subject} \n\n\n   {body}'
         server.sendmail(
-            'Innovator_email',
-            'Admin_email/User_email',
+            'satamom254@gmail.com',
+            'omsatam1005@gmail.com',
             message
         )
         print('Email has been sent successfully')
@@ -82,6 +84,11 @@ def handleSignup(request):
         pass1 = request.POST.get('pass1')
         pass2 = request.POST.get('pass2')
 
+        user = User.objects.get(username=username)
+        if user:
+            messages.error(
+                request, 'Username already taken please choose another')
+            return redirect('home')
         if len(username) > 12:
             messages.error(request, 'Your username is too long')
             return redirect('home')
@@ -117,14 +124,14 @@ def handleLogin(request):
             return redirect(home)
         messages.error(
             request, "Invalid credentials, please enter correct details")
-        return redirect(uploader)
+        return redirect(home)
     return redirect(home)
 
 
 def handleLogout(request):
     logout(request)
     messages.success(request, "successfully logged out")
-    return redirect(uploader)
+    return redirect(home)
 
 
 def uploader(request):
@@ -139,18 +146,22 @@ def uploader(request):
 
             import os
             import shutil
-            parentdirDicomfiles = 'F:\\Final year project\\3D Innovators production\\Innovators\\dicom\\dicom\\dicomFiles\\'
-            parentdirStlfiles = 'F:\\Final year project\\3D Innovators production\\Innovators\\dicom\\dicom\\stlFiles\\'
+            parentdirDicomfiles = 'F:\\Final year project\\3D!nnovators\\Innovators\\dicom\\dicom\\dicomFiles\\'
+            parentdirStlfiles = 'F:\\Final year project\\3D!nnovators\\Innovators\\dicom\\dicom\\stlFiles\\'
+            parentdirNrrdfiles = 'F:\\Final year project\\3D!nnovators\\Innovators\\dicom\\dicom\\nrrdFiles\\'
             directoryName = str(username) + str(userid)
             try:
                 shutil.rmtree(parentdirDicomfiles + directoryName)
                 shutil.rmtree(parentdirStlfiles + directoryName)
+                shutil.rmtree(parentdirNrrdfiles + directoryName)
             except:
                 pass
             pathDicomfiles = os.path.join(parentdirDicomfiles, directoryName)
             pathStlfiles = os.path.join(parentdirStlfiles, directoryName)
+            pathNrrdfiles = os.path.join(parentdirNrrdfiles, directoryName)
             os.mkdir(pathDicomfiles)
             os.mkdir(pathStlfiles)
+            os.mkdir(pathNrrdfiles)
             # saveDicomFiles(username = username).save()
             # print((CT_data))
             # ct_data = []
@@ -173,7 +184,7 @@ def uploader(request):
         import vtk
         from vtk.util import numpy_support
         import os
-        import numpy
+        import numpy as np
         from IPython.display import Image
         import chart_studio.plotly as py
         #from plotly.graph_objs import *
@@ -223,8 +234,6 @@ def uploader(request):
             data = writer.GetResult()
 
             return Image(data)
-
-
         try:
             # CT_data = dict(CT_data)
             # ct_data = glob(str(ct_data) + '/*.dcm')
@@ -234,11 +243,20 @@ def uploader(request):
 
             # Load dimensions using `GetDataExtent`
             _extent = reader.GetDataExtent()
-            ConstPixelDims = [_extent[1]-_extent[0]+1,_extent[3]-_extent[2]+1, _extent[5]-_extent[4]+1]
+            ConstPixelDims = [_extent[1]-_extent[0]+1,
+                              _extent[3]-_extent[2]+1, _extent[5]-_extent[4]+1]
 
             # Load spacing values
             ConstPixelSpacing = reader.GetPixelSpacing()
-
+            imageData = reader.GetOutput()
+            pointData = imageData.GetPointData()
+            assert(pointData)
+            arrayData = pointData.GetArray(0)
+            ArrayDicom = numpy_support.vtk_to_numpy(arrayData)
+            ArrayDicom = ArrayDicom.reshape(ConstPixelDims, order='F')
+            # print("the first array shape ", ArrayDicom.shape)
+            nrrd.write(pathNrrdfiles + "/" + stlFilename + str(userid) +
+                       ".nrrd", ArrayDicom, index_order='F')
             #shiftScale = vtk.vtkImageShiftScale()
             # shiftScale.SetScale(reader.GetRescaleSlope())
             # shiftScale.SetShift(reader.GetRescaleOffset())
@@ -295,17 +313,24 @@ def uploader(request):
             vtk_show(renderer, 600, 600)
             writer = vtk.vtkSTLWriter()
             writer.SetInputConnection(dmc.GetOutputPort())
+
             writer.SetFileTypeToBinary()
             writer.SetFileName(stlFilename + str(userid) + '.stl')
             writer.Write()
-            shutil.move("F:\\Final year project\\3D Innovators production\\Innovators\\" +stlFilename + str(userid) + '.stl', pathStlfiles)
-            downloadStlpath = '../dicom/dicom/stlFiles/' + directoryName + '/' + stlFilename + str(userid) + '.stl'
-            messages.success(request, "Thanks for using, click specified link to download file")
-            return render(request, 'downloader.html', {'stlPath': downloadStlpath})
-
+            shutil.move("F:\\Final year project\\3D!nnovators\\Innovators\\" +
+                        stlFilename + str(userid) + '.stl', pathStlfiles)
+            downloadStlpath = '../dicom/dicom/stlFiles/' + \
+                directoryName + '/' + stlFilename + str(userid) + '.stl'
+            downloadNrrdpath = '../dicom/dicom/nrrdFiles/' + \
+                directoryName + '/' + stlFilename + str(userid) + '.nrrd'
+            messages.success(
+                request, "Thanks for using, click specified links to download respective files")
+            return render(request, 'downloader.html', {'stlPath': downloadStlpath, 'nrrdPath': downloadNrrdpath})
         except:
-            messages.error(request,"Please select the dicom files correctly and try again")
+            messages.error(
+                request, "Please select the dicom files correctly and try again")
             return redirect(uploader)
+
     return render(request, 'uploader.html')
 
 
