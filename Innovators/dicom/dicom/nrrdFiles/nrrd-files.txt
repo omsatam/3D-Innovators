@@ -1,0 +1,1 @@
+In this folder the user specific folders are created for dicom files.It contains dicom files uploaded by user.
