@@ -53,13 +53,13 @@ def contact(request):
         server.starttls()
         server.ehlo()
 
-        server.login('satamom254@gmail.com', 'ydcpkkzqtdwndcqs')
+        server.login('InnovatorEmailAddress', 'InnovatorEmailPassword')
         subject = "Recieved feedback from " + str(fname) + " " + str(lname)
         body = str(fname) + " " + str(lname) + " says " + str(feedback)
         message = f'subject:{subject} \n\n\n   {body}'
         server.sendmail(
-            'satamom254@gmail.com',
-            'omsatam1005@gmail.com',
+            'InnovatorEmailAddress',
+            'ReciepientEmailAddress',
             message
         )
         print('Email has been sent successfully')
